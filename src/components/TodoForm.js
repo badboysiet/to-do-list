@@ -1,0 +1,38 @@
+import React, { useContext, useState } from "react";
+import Store from "../context";
+
+export default function TodoForm() {
+  const { dispatch } = useContext(Store);
+
+  const [todo, setTodo] = useState("");
+
+  function handleTodoChange(e) {
+    setTodo(e.target.value);
+  }
+
+  function handleTodoAdd() {
+    dispatch({ type: "ADD_TODO", payload: todo });
+    setTodo("");
+  }
+
+  return (
+    <div className="row">
+      <div className="col-md-12">
+        <br />
+        <div className="input-group">
+          <input
+            className="form-control"
+            value={todo}
+            placeholder="Enter new todo"
+            onChange={handleTodoChange}
+          />
+          <div className="input-group-append">
+            <button className="btn btn-primary" onClick={handleTodoAdd}>
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
